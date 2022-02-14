@@ -13,7 +13,12 @@ cc_library(
     hdrs = [
         "pin_defs.h",
     ],
-    target_compatible_with = ["//bazel/constraints:atmega16m1"],
+    #https://docs.bazel.build/versions/main/platforms.html#more-expressive-constraints
+    target_compatible_with = select({
+        "//bazel/constraints:atmega16m1": [],
+        "//bazel/constraints:atmega328p": [],
+        "//conditions:default": ["//bazel/constraints:incompatible"],
+    }),
     visibility = ["//visibility:public"],
     deps = [
         ":hdrs",

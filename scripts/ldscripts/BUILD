@@ -8,3 +8,10 @@ filegroup(
         "atmega16m1.ld",
     ],
 )
+
+filegroup(
+    name = "atmega328p",
+    srcs = [
+        "atmega328p.ld",
+    ],
+)

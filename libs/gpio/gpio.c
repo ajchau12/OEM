@@ -27,7 +27,9 @@
 __attribute__((weak)) void pcint0_callback(void) {};
 __attribute__((weak)) void pcint1_callback(void) {};
 __attribute__((weak)) void pcint2_callback(void) {};
+#ifdef __AVR_ATmega16M1__
 __attribute__((weak)) void pcint3_callback(void) {};
+#endif
 
 ISR(PCINT0_vect) {
     pcint0_callback();
@@ -41,9 +43,11 @@ ISR(PCINT2_vect) {
     pcint2_callback();
 }
 
+#ifdef __AVR_ATmega16M1__
 ISR(PCINT3_vect) {
     pcint3_callback();
 }
+#endif
 
 void gpio_enable_interrupt(gpio_t pin) {
     sei();
@@ -60,9 +64,11 @@ void gpio_enable_interrupt(gpio_t pin) {
             PCICR |= (1 << PCIE2);
             PCMSK2 |= (1 << pin.num);
         } break;
+#ifdef __AVR_ATmega16M1__
         case 0x0E: {
             PCICR |= (1 << PCIE3);
             PCMSK3 |= (1 << pin.num);
         } break;
+#endif
     }
 }

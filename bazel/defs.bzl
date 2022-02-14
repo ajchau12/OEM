@@ -246,11 +246,13 @@ def cc_firmware(name, **kwargs):
         name = "{}.elf".format(name),
         linkopts = select({
             "//bazel/constraints:atmega16m1": ["-T $(location //scripts/ldscripts:atmega16m1.ld)"],
+            "//bazel/constraints:atmega328p": ["-T $(location //scripts/ldscripts:atmega328p.ld)"],
             # Add more ldscripts here
             "//conditions:default": [],
         }),
         additional_linker_inputs = [
             "//scripts/ldscripts:atmega16m1.ld",
+            "//scripts/ldscripts:atmega328p.ld",
         ],
         **kwargs
     )
