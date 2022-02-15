@@ -1,0 +1,304 @@
+{
+    "fe": "",
+    "fs": "",
+    "g": [
+        {
+            "d": [
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": false,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "Runtime",
+                    "u": "ms",
+                    "v": "%2",
+                    "w": ""
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": false,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "Packet count",
+                    "u": "",
+                    "v": "%3",
+                    "w": ""
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 4.3,
+                    "min": 3.6,
+                    "t": "Battery voltage",
+                    "u": "V",
+                    "v": "%4",
+                    "w": "bar"
+                }
+            ],
+            "t": "Mission Status",
+            "w": ""
+        },
+        {
+            "d": [
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 80,
+                    "min": 0,
+                    "t": "Temperature",
+                    "u": "°C",
+                    "v": "%5",
+                    "w": "bar"
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": false,
+                    "led": false,
+                    "log": false,
+                    "max": 3000,
+                    "min": 0,
+                    "t": "Altitude",
+                    "u": "m",
+                    "v": "%6",
+                    "w": "bar"
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 102,
+                    "min": 54,
+                    "t": "Pressure",
+                    "u": "KPa",
+                    "v": "%7",
+                    "w": "bar"
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 80,
+                    "min": 0,
+                    "t": "External Temperature",
+                    "u": "°C",
+                    "v": "%8",
+                    "w": "bar"
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 100,
+                    "min": 0,
+                    "t": "Humidity",
+                    "u": "%",
+                    "v": "%9",
+                    "w": "bar"
+                }
+            ],
+            "t": "Sensor Readings",
+            "w": ""
+        },
+        {
+            "d": [
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": false,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "GPS Time",
+                    "u": "",
+                    "v": "%10",
+                    "w": ""
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": false,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "Longitude",
+                    "u": "°E",
+                    "v": "%11",
+                    "w": "lon"
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": false,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "Latitude",
+                    "u": "°N",
+                    "v": "%12",
+                    "w": "lat"
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": false,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "Altitude",
+                    "u": "m",
+                    "v": "%13",
+                    "w": ""
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": false,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "No. Sats",
+                    "u": "",
+                    "v": "%14",
+                    "w": ""
+                }
+            ],
+            "t": "GPS",
+            "w": "map"
+        },
+        {
+            "d": [
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "X",
+                    "u": "m/s^2",
+                    "v": "%15",
+                    "w": "x"
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "Y",
+                    "u": "m/s^2",
+                    "v": "%16",
+                    "w": "y"
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "Z",
+                    "u": "m/s^2",
+                    "v": "%17",
+                    "w": "z"
+                }
+            ],
+            "t": "Accelerometer",
+            "w": "accelerometer"
+        },
+        {
+            "d": [
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "Gyroscope X",
+                    "u": "°",
+                    "v": "%18",
+                    "w": "yaw"
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "Gyroscope Y",
+                    "u": "°",
+                    "v": "%19",
+                    "w": "roll"
+                },
+                {
+                    "alarm": 0,
+                    "fft": false,
+                    "fftSamples": 1,
+                    "g": true,
+                    "led": false,
+                    "log": false,
+                    "max": 0,
+                    "min": 0,
+                    "t": "Gyroscope Z",
+                    "u": "°",
+                    "v": "%20",
+                    "w": "pitch"
+                }
+            ],
+            "t": "Gyroscope",
+            "w": "gyro"
+        }
+    ],
+    "s": "",
+    "t": "%1"
+}
