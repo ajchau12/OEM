@@ -74,6 +74,27 @@ X GND 3 0 -300 100 U 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
+# formula_AP7370
+#
+DEF formula_AP7370 U 0 10 Y Y 1 F N
+F0 "U" -150 125 50 H V C CNN
+F1 "formula_AP7370" 0 125 50 H V L CNN
+F2 "footprints:SOT-23-5" -50 200 50 H I C CNN
+F3 "" 100 -250 50 H I C CNN
+F4 "DK" 50 325 60 H I C CNN "MFN"
+F5 "AP7370-50W5-7DICT-ND" 150 425 60 H I C CNN "MPN"
+F6 "https://www.digikey.com/en/products/detail/diodes-incorporated/AP7370-50W5-7/10235827" 150 425 60 H I C CNN "PurchasingLink"
+$FPLIST
+ SOT?223*TabPin2*
+$ENDFPLIST
+DRAW
+S -200 -200 200 75 0 1 10 f
+X Vin 1 -300 0 100 R 50 50 1 1 W
+X GND 2 0 -300 100 U 50 50 1 1 W
+X Vout 5 300 0 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
 # formula_ATMEGA16M1
 #
 DEF formula_ATMEGA16M1 U 0 40 Y Y 1 F N
@@ -82,8 +103,8 @@ F1 "formula_ATMEGA16M1" 500 -1400 50 H V L BNN
 F2 "footprints:TQFP-32_7x7mm_Pitch0.8mm" 0 0 50 H I C CIN
 F3 "" -950 1830 50 H I C CNN
 F4 "DK" 0 0 60 H I C CNN "MFN"
-F5 "ATMEGA16M1-AU-ND" 0 0 60 H I C CNN "MPN"
-F6 "https://www.digikey.com/product-detail/en/atmel/ATMEGA16M1-AU/ATMEGA16M1-AU-ND/2271208" -550 2230 60 H I C CNN "PurchasingLink"
+F5 "ATMEGA64M1-AU-ND" 0 0 60 H I C CNN "MPN"
+F6 "https://www.digikey.com/en/products/detail/microchip-technology/ATMEGA64M1-AU/2271014" -550 2230 60 H I C CNN "PurchasingLink"
 $FPLIST
  TQFP*32*7x7mm*
 $ENDFPLIST
