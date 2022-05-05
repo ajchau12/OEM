@@ -4,8 +4,6 @@ subscribe:
   - name: bms_core
     mob: 1
   - name: M167_Voltage_Info
-    # TODO: rename is currently not handled. Name comes from DBC
-    rename: motor_controller_voltage
     mob: 2
 
     # TODO: How are we handling this? Maybe we don't handle it here...
