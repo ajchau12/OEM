@@ -401,14 +401,15 @@ int main(void) {
     gpio_clear_pin(SS_HVD);
 
     gpio_set_pin(GENERAL_LED);
+    // gpio_set_pin(FAULT_LED);
 
     updater_init(BTLDR_ID, 5);
 
     air_control_critical.air_state = INIT;
 
     // Set LED to indicate initial checks will be run
-    gpio_set_pin(GENERAL_LED);
-    gpio_clear_pin(FAULT_LED);
+    // gpio_set_pin(GENERAL_LED);
+    // gpio_clear_pin(FAULT_LED);
 
     // Send message once before checks
     can_send_air_control_critical();
@@ -446,18 +447,18 @@ int main(void) {
         }
     }
 
-// fault:
-//     gpio_set_pin(FAULT_LED);
-//
-//     while (1) {
-//         updater_loop();
-//         /*
-//          * Continue senging CAN messages
-//          */
-//         if (send_can) {
-//             gpio_toggle_pin(GENERAL_LED);
-//             can_send_air_control_critical();
-//             send_can = false;
-//         }
-//     };
+    // fault:
+    //     gpio_set_pin(FAULT_LED);
+    //
+    //     while (1) {
+    //         updater_loop();
+    //         /*
+    //          * Continue senging CAN messages
+    //          */
+    //         if (send_can) {
+    //             gpio_toggle_pin(GENERAL_LED);
+    //             can_send_air_control_critical();
+    //             send_can = false;
+    //         }
+    //     };
 }

@@ -47,7 +47,7 @@ typedef struct __attribute__((packed)) {
  * Fetch the image header from flash into memory and return a pointer to a
  * memory location
  */
-const image_hdr_t image_get_header(void);
+image_hdr_t image_get_header(void);
 
 /*
  * Validates the image. Image must have the following correct properties:
@@ -61,7 +61,7 @@ const image_hdr_t image_get_header(void);
  *   IMAGE_INVALID_MAGIC (1) if magic is incorrect
  *   IMAGE_INVLIAD_CRC (2) if crc is incorrect
  */
-uint8_t image_validate(const image_hdr_t hdr);
+uint8_t image_validate(const image_hdr_t hdr, uint32_t* calc_crc);
 
 /*
  * Retrieves the image timestamp by invoking `image_get_header`

@@ -60,9 +60,21 @@ uint8_t handle_reset(uint16_t btldr_id, uint8_t* data, uint8_t length) {
         asm("jmp 0x3000");
     }
 
+    uint32_t crc = 0;
+
     // Validate image
-    const image_hdr_t image_hdr = image_get_header();
-    uint8_t valid = image_validate(image_hdr);
+    volatile image_hdr_t image_hdr = image_get_header();
+    uint8_t valid = image_validate(image_hdr, &crc);
+
+    uint8_t data[4] = { ERR_IMAGE_INVALID, valid };
+    can_frame_t debug = {
+        .mob = 0,
+        .id = 0x7fc,
+        .data = (uint8_t*)&crc,
+        .dlc = 4,
+    };
+
+    st = can_send(&debug);
 
     if (valid == IMAGE_VALID) {
         bootflag_clear(UPDATE_REQUESTED);

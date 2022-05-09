@@ -2,25 +2,20 @@
 
 #include <avr/eeprom.h>
 #include <avr/pgmspace.h>
+#include <util/delay.h>
 #include <stdint.h>
 
 #include "projects/btldr/libs/crc32/api.h"
 
-// Address of image header. To use, cast as void *
-extern void* __image_hdr;
-
 #define APP_IMAGE_HEADER_ADDRESS ((void*)0x7c)
 
-// Static variable to store image header in memory
-// static image_hdr_t prv_hdr;
-
-const image_hdr_t image_get_header(void) {
+image_hdr_t image_get_header(void) {
     image_hdr_t hdr;
     memcpy_P(&hdr, APP_IMAGE_HEADER_ADDRESS, sizeof(image_hdr_t));
     return hdr;
 }
 
-uint8_t image_validate(const image_hdr_t hdr) {
+uint8_t image_validate(const image_hdr_t hdr, uint32_t* calc_crc) {
     // Get image start address (after header) and size
     uint16_t image_addr
         = ((uintptr_t)APP_IMAGE_HEADER_ADDRESS) + sizeof(image_hdr_t);

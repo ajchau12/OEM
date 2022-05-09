@@ -2,7 +2,7 @@ import can
 import threading
 import time
 
-seeedbus = can.interface.Bus(bustype='seeedstudio', channel='/dev/ttyUSB0', bitrate=500000)
+seeedbus = can.interface.Bus(bustype='seeedstudio', channel='/dev/ttyUSB1', bitrate=500000)
 virt = can.interface.Bus('vcan0', bustype='virtual', interface="socketcan", preserve_timestamps=True)
 
 def seeed_to_virt():
