@@ -401,7 +401,9 @@ int main(void) {
     gpio_clear_pin(SS_HVD);
 
     gpio_set_pin(GENERAL_LED);
-    // gpio_set_pin(FAULT_LED);
+    gpio_set_pin(FAULT_LED);
+    // gpio_clear_pin(GENERAL_LED);
+    // gpio_clear_pin(FAULT_LED);
 
     updater_init(BTLDR_ID, 5);
 
@@ -436,10 +438,10 @@ int main(void) {
             updater_loop();
         }
 
-        if (run_1ms) {
-            state_machine_run();
-            run_1ms = false;
-        }
+        // if (run_1ms) {
+        //     state_machine_run();
+        //     run_1ms = false;
+        // }
 
         if (send_can) {
             can_send_air_control_critical();

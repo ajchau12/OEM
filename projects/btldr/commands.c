@@ -50,9 +50,15 @@ uint8_t handle_query(uint16_t btldr_id, uint8_t* data, uint8_t length) {
 uint8_t handle_reset(uint16_t btldr_id, uint8_t* data, uint8_t length) {
     uint8_t st = 0;
 
+    if (session.is_active) {
+        flash_force_write_page(&(session.current_addr.word));
+    }
+
     boot_rww_enable();
 
     session.is_active = false;
+    session.current_addr.word = 0;
+    session.remaining_size.word = 0;
 
     // If update is requested, set the flag and reset
     if (data[0] == RESET_REQUEST_UPDATE) {
@@ -66,19 +72,21 @@ uint8_t handle_reset(uint16_t btldr_id, uint8_t* data, uint8_t length) {
     volatile image_hdr_t image_hdr = image_get_header();
     uint8_t valid = image_validate(image_hdr, &crc);
 
-    uint8_t data[4] = { ERR_IMAGE_INVALID, valid };
-    can_frame_t debug = {
-        .mob = 0,
-        .id = 0x7fc,
-        .data = (uint8_t*)&crc,
-        .dlc = 4,
-    };
-
-    st = can_send(&debug);
-
     if (valid == IMAGE_VALID) {
         bootflag_clear(UPDATE_REQUESTED);
         bootflag_set(IMAGE_IS_VALID);
+
+        uint8_t resp_data[1] = {
+            IMAGE_VALID,
+        };
+        can_frame_t response = {
+            .mob = 0,
+            .id = (btldr_id << 4) | CAN_ID_STATUS,
+            .data = resp_data,
+            .dlc = 1,
+        };
+        
+        st = can_send(&response);
 
         // Back to bootloader
         asm("jmp 0x3000");
@@ -86,12 +94,16 @@ uint8_t handle_reset(uint16_t btldr_id, uint8_t* data, uint8_t length) {
         bootflag_clear(IMAGE_IS_VALID);
 
         // Transmit error with invalid image and reason for invalid
-        uint8_t err_data[2] = { ERR_IMAGE_INVALID, valid };
+        uint8_t err_data[6] = {
+            ERR_IMAGE_INVALID,
+            valid,
+        };
+        memcpy(err_data+2, &crc, 4);
         can_frame_t response = {
             .mob = 0,
             .id = (btldr_id << 4) | CAN_ID_STATUS,
             .data = err_data,
-            .dlc = 2,
+            .dlc = 6,
         };
 
         st = can_send(&response);
