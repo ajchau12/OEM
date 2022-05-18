@@ -6,12 +6,13 @@
 #include "libs/timer/api.h"
 
 #include "air_config.h"
-#include "projects/btldr/btldr_lib.h"
-#include "projects/btldr/git_sha.h"
-#include "projects/btldr/libs/image/api.h"
 #include "utils/timer.h"
 #include "utils/utils.h"
 #include "vehicle/mkv/software/air_control/can_api.h"
+
+#include "projects/btldr/btldr_lib.h"
+#include "projects/btldr/git_sha.h"
+#include "projects/btldr/libs/image/api.h"
 
 /*
  * Required for btldr
@@ -62,7 +63,7 @@ static void set_fault(enum FaultCode the_fault) {
  */
 volatile bool send_can = false;
 
-void timer0_compa_callback(void) {
+void timer0_isr(void) {
     send_can = true;
 }
 
@@ -361,14 +362,10 @@ static void state_machine_run(void) {
 }
 
 int main(void) {
-    MCUCR |= (1 << IVCE);
-    MCUCR &= ~(1 << IVSEL);
-    sei();
-
     can_init_air_control();
-
     timer_init(&timer0_cfg);
     timer_init(&timer1_cfg);
+    updater_init(BTLDR_ID, 5);
 
     gpio_set_mode(PRECHARGE_CTL, OUTPUT);
     gpio_set_mode(AIR_N_LSD, OUTPUT);
@@ -400,48 +397,49 @@ int main(void) {
     gpio_clear_pin(SS_HVD_CONN);
     gpio_clear_pin(SS_HVD);
 
-    gpio_set_pin(GENERAL_LED);
-    gpio_set_pin(FAULT_LED);
-    // gpio_clear_pin(GENERAL_LED);
-    // gpio_clear_pin(FAULT_LED);
-
     updater_init(BTLDR_ID, 5);
 
     air_control_critical.air_state = INIT;
 
+    // Initialize interrupts
+    sei();
+
     // Set LED to indicate initial checks will be run
-    // gpio_set_pin(GENERAL_LED);
-    // gpio_clear_pin(FAULT_LED);
+    gpio_set_pin(GENERAL_LED);
 
     // Send message once before checks
     can_send_air_control_critical();
 
-    // if (initial_checks() == 1) {
-    //     goto fault;
-    // }
+    if (initial_checks() == 1) {
+        goto fault;
+    }
 
-    air_control_critical.air_state = IDLE;
+    pcint0_callback();
+    pcint1_callback();
+    pcint2_callback();
 
     pcint0_callback();
     pcint1_callback();
     pcint2_callback();
 
     // Clear LED to indicate that initial checks passed
-    // gpio_clear_pin(GENERAL_LED);
+    gpio_clear_pin(GENERAL_LED);
 
     // Send message again after initial checks are run
     can_send_air_control_critical();
 
+    air_control_critical.air_state = IDLE;
+
     while (1) {
         // Run state machine every 1ms
+        if (run_1ms) {
+            state_machine_run();
+            run_1ms = false;
+        }
+
         if (air_control_critical.air_state == IDLE) {
             updater_loop();
         }
-
-        // if (run_1ms) {
-        //     state_machine_run();
-        //     run_1ms = false;
-        // }
 
         if (send_can) {
             can_send_air_control_critical();
@@ -449,18 +447,19 @@ int main(void) {
         }
     }
 
-    // fault:
-    //     gpio_set_pin(FAULT_LED);
-    //
-    //     while (1) {
-    //         updater_loop();
-    //         /*
-    //          * Continue senging CAN messages
-    //          */
-    //         if (send_can) {
-    //             gpio_toggle_pin(GENERAL_LED);
-    //             can_send_air_control_critical();
-    //             send_can = false;
-    //         }
-    //     };
+fault:
+    gpio_set_pin(FAULT_LED);
+
+    while (1) {
+        /*
+         * Continue senging CAN messages
+         */
+
+        updater_loop();
+
+        if (send_can) {
+            can_send_air_control_critical();
+            send_can = false;
+        }
+    };
 }
