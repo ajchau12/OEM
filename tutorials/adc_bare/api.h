@@ -4,17 +4,17 @@
 #define AS_VOLTAGE(raw) (float)raw*(0.004882813)
 
 typedef enum {
-    ADC0,
-    ADC1,
-    ADC2,
-    ADC3,
-    ADC4,
-    ADC5,
-    ADC6,
-    ADC7,
-    ADC8,
-    ADC9,
-    ADC10,
+    ADC0 = 0x00,
+    ADC1 = 0x01,
+    ADC2 = 0x02,
+    ADC3 = 0x03,
+    ADC4 = 0x04,
+    ADC5 = 0x05,
+    ADC6 = 0x06,
+    ADC7 = 0x07,
+    ADC8 = 0x08,
+    ADC9 = 0x09,
+    ADC10 = 0x0A,
 } adc_pin_e;
 
 void adc_init(void);
