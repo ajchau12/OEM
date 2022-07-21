@@ -1,0 +1,18 @@
+load("//bazel:defs.bzl", "cc_firmware")
+
+cc_firmware(
+    name = "blinky_plus",
+    srcs = [
+        "blinky_plus.c",
+        "blinky_config.h",
+    ],
+    target_compatible_with = select({
+        "//bazel/constraints:atmega16m1": [],
+        "//bazel/constraints:atmega64m1": [],
+        "//conditions:default": ["//bazel/constraints:incompatible_mcu"],
+    }),
+    deps = [
+        "//libs/gpio",
+        "//libs/timer",
+    ],
+)
