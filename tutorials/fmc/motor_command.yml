@@ -1,0 +1,13 @@
+name: fmc
+publish:
+  - name: fmc_command
+    id: 0x030
+    freq_hz: 25
+    signals:
+      - name: torque_request
+        slice: 0 + 8
+        unit:
+          type: uint8_t
+          name: "N*m"
+          offset: 0
+          scale: 1
