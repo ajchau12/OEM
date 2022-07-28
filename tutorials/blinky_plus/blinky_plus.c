@@ -7,7 +7,7 @@
 #include <stdbool.h>
 #include <avr/interrupt.h>
 
-static bool toggle_500_Hz = true;
+static volatile bool toggle_500_Hz = true;
 
 void timer1_isr(void) {
     toggle_500_Hz = true;
